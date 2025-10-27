@@ -38,6 +38,9 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "co
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
 
+// LLM chat window
+import ChatWindow from "components/MDLLM/ChatWindow";
+
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
   const {
@@ -49,6 +52,7 @@ export default function App() {
     transparentSidenav,
     whiteSidenav,
     darkMode,
+    openChat,
   } = controller;
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const [rtlCache, setRtlCache] = useState(null);
@@ -147,6 +151,7 @@ export default function App() {
             />
             <Configurator />
             {configsButton}
+            {openChat && <ChatWindow />}
           </>
         )}
         {layout === "vr" && <Configurator />}
@@ -164,13 +169,14 @@ export default function App() {
           <Sidenav
             color={sidenavColor}
             brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brandName="Material Dashboard 2"
+            brandName="항공사진 기반 GeoAI 플랫폼"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
           />
           <Configurator />
           {configsButton}
+          {openChat && <ChatWindow />}
         </>
       )}
       {layout === "vr" && <Configurator />}

@@ -46,6 +46,7 @@ import {
   setFixedNavbar,
   setSidenavColor,
   setDarkMode,
+  setOpenChat,
 } from "context";
 
 function Configurator() {
@@ -57,6 +58,7 @@ function Configurator() {
     transparentSidenav,
     whiteSidenav,
     darkMode,
+    openChat,
   } = controller;
   const [disabled, setDisabled] = useState(false);
   const sidenavColors = ["primary", "dark", "info", "success", "warning", "error"];
@@ -93,6 +95,7 @@ function Configurator() {
   };
   const handleFixedNavbar = () => setFixedNavbar(dispatch, !fixedNavbar);
   const handleDarkMode = () => setDarkMode(dispatch, !darkMode);
+  const handleOpenChat = () => setOpenChat(dispatch, true);
 
   // sidenav type buttons styles
   const sidenavTypeButtonsStyles = ({
@@ -207,7 +210,6 @@ function Configurator() {
             ))}
           </MDBox>
         </MDBox>
-
         <MDBox mt={3} lineHeight={1}>
           <MDTypography variant="h6">Sidenav Type</MDTypography>
           <MDTypography variant="button" color="text">
@@ -296,6 +298,24 @@ function Configurator() {
             fullWidth
           >
             view documentation
+          </MDButton>
+        </MDBox>
+        <MDBox mt={3} mb={2}>
+          <MDButton
+            color="dark"
+            variant="gradient"
+            onClick={handleOpenChat}
+            disabled={disabled}
+            fullWidth
+            sx={{
+              background: "linear-gradient(45deg, #6a11cb 30%, #2575fc 90%)",
+              color: "#fff",
+              "&:hover": {
+                background: "linear-gradient(45deg, #2575fc 30%, #6a11cb 90%)",
+              },
+            }}
+          >
+            GeoLLM chat
           </MDButton>
         </MDBox>
         <MDBox display="flex" justifyContent="center">

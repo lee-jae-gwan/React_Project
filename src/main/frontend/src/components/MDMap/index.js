@@ -74,8 +74,8 @@ export default function MyMap() {
 
   return (
     <div>
-      <MDBox display="flex" gap={2} p={2}>
-        <MDBox flex={1}>
+      <MDBox display="flex" gap={3} p={3}>
+        <MDBox>
           <MDInput
             type="number"
             label="Latitude"
@@ -96,7 +96,7 @@ export default function MyMap() {
             fullWidth
           />
         </MDBox>
-        <MDBox flex={1}>
+        <MDBox>
           <MDInput
             type="number"
             label="Longitude"

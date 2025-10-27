@@ -44,7 +44,7 @@ function Dashboard() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <div style={{ width: "100%", height: "500px", marginBottom: "80px" }}>
+      <div style={{ width: "100%", height: "500px", marginBottom: "90px" }}>
         <MyMap />
       </div>
       <MDBox py={3}>

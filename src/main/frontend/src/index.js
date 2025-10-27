@@ -20,6 +20,7 @@ import App from "App";
 
 // Material Dashboard 2 React Context Provider
 import { MaterialUIControllerProvider } from "context";
+import { ChatProvider } from "components/MDLLM/ChatContext";
 
 const container = document.getElementById("app");
 const root = createRoot(container);
@@ -27,7 +28,9 @@ const root = createRoot(container);
 root.render(
   <BrowserRouter>
     <MaterialUIControllerProvider>
-      <App />
+      <ChatProvider>
+        <App />
+      </ChatProvider>
     </MaterialUIControllerProvider>
   </BrowserRouter>
 );
