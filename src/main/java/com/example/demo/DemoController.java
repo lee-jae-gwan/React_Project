@@ -13,6 +13,10 @@ public class DemoController {
 	@GetMapping("/demo/api/data")
 	public String test(){
 		return "Hello React!";
-	} 
+	}
+	@GetMapping("/")
+	public String index(){
+		return "forward:/index.html";
+	}
 
 }

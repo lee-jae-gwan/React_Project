@@ -40,9 +40,19 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-task buildFrontend(type: Exec){
-	workingDir 'src/main/frontend'
-	commandLine 'C:/Program Files/nodejs/npm.cmd', 'run', 'build'
+task buildFrontend(type: Exec) {
+    workingDir 'src/main/frontend'
+    commandLine 'C:/Program Files/nodejs/npm.cmd', 'run', 'build'
 }
 
+bootRun {
+    dependsOn buildFrontend
+}
+
+bootJar {
+    dependsOn buildFrontend
+    from('src/main/frontend/build') {
+        into('static')  // 빌드 결과를 resources/static으로 복사
+    }
+}
 processResources.dependsOn(buildFrontend)
