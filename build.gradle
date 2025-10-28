@@ -34,25 +34,30 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.kafka:spring-kafka'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
-task buildFrontend(type: Exec) {
-    workingDir 'src/main/frontend'
+tasks.register('buildFrontend', Exec) {
+    workingDir 'frontend'
     commandLine 'C:/Program Files/nodejs/npm.cmd', 'run', 'build'
 }
 
+
 bootRun {
-    dependsOn buildFrontend
+    dependsOn 'buildFrontend'
 }
 
 bootJar {
-    dependsOn buildFrontend
-    from('src/main/frontend/build') {
-        into('static')  // 빌드 결과를 resources/static으로 복사
+    dependsOn 'buildFrontend'
+    from('frontend/build') {
+        into 'static'
     }
 }
-processResources.dependsOn(buildFrontend)
+
+
+processResources.dependsOn 'buildFrontend'

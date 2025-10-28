@@ -4,6 +4,7 @@ import ChatInput from "./ChatInput";
 import { useChat } from "./ChatContext";
 import { useMaterialUIController, setOpenChat } from "context";
 import MDButton from "components/MDButton";
+import axios from "axios";
 
 function ChatWindow() {
   const [controller, dispatch] = useMaterialUIController();
@@ -11,17 +12,22 @@ function ChatWindow() {
   const { messages, addMessage } = useChat();
   const wrapperRef = useRef();
 
-  const handleSend = (text) => {
+  const handleSend = async (text) => {
     const newMessage = { role: "user", content: text };
     addMessage(newMessage);
 
-    setTimeout(() => {
+    try {
+      const res = await axios.post("/api/chat", { message: text });
+      const aiReply = { role: "assistant", content: res.data.reply };
+      addMessage(aiReply);
+    } catch (error) {
+      console.error(error);
       const aiReply = {
         role: "assistant",
-        content: `맞습니다 \n "${text}"`,
+        content: "죄송합니다. 답변을 가져오는 도중 오류가 발생했습니다.",
       };
       addMessage(aiReply);
-    }, 600);
+    }
   };
   const handleClose = () => setOpenChat(dispatch, false);
 
